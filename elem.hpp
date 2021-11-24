@@ -14,6 +14,6 @@ class elem
     
     virtual void draw() const = 0;
     virtual void updatePos(int, int) const = 0;
+};
    
-
 #endif
