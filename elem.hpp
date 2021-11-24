@@ -11,6 +11,8 @@ class elem
   
    public:
     elem(int, int, int, int);
+  
+    virtual ~elem();
  
     void setXPos(int);
     void setYPos(int);
