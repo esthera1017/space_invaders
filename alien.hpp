@@ -9,7 +9,8 @@ class alien : public elem
     alien(int, int, int, int);
     
     void draw() const override;
-    void updatePos(int, int) const override;
+    void erase() const override;
+    void updatePos(int, int) override;
  };
 
 #endif
