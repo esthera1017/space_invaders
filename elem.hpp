@@ -11,8 +11,11 @@ class elem
   
    public:
     elem(int, int, int, int);
-    
+ 
+    void setXPos(int);
+    void setYPos(int);
     virtual void draw() const = 0;
+    virtual void erase() const = 0;
     virtual void updatePos(int, int) const = 0;
 };
    
