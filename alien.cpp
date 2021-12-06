@@ -1,23 +1,32 @@
 #include "alien.hpp"
 #include "elem.hpp"
 
+#include <QRect>
+
 alien::alien(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
 
-void alien::draw() const
+void alien::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-  //TODO: Will be determined by qt drawing libraries
+  painter->fillRect(xPos, yPos, width, length, "green");
 }
 
-void alien::erase() const
+QRectF alien::boundingRect() const
 {
-  //TODO: Will be determined by qt drawing libraries
+  qreal penWidth = 1;
+  return QRectF(xPos - penWidth, yPos - penWidth,
+                width + penWidth, length + penWidth);
 }
 
-void alien::updatePos(int dx, int dy)
+void alien::erase(QPainter* painter) const
 {
-  erase();
+  painter->fillRect(xPos, yPos, width, length, "black");
+}
+
+void alien::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+  erase(painter);
   setXPos(this->xPos + dx);
   setYPos(this->yPos + dy);
-  draw();
+  paint(painter, option, widget);
 }

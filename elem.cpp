@@ -6,12 +6,12 @@ elem::elem(int width, int length, int xPos, int yPos) : width {width}, length {l
 elem::~elem()
 {}
 
-elem::setPos(int newX)
+void elem::setXPos(int newX)
 {
   xPos = newX;
 }
 
-elem::setYPos(int newY)
+void elem::setYPos(int newY)
 {
   yPos = newY;
 }

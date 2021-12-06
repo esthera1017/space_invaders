@@ -8,9 +8,10 @@ class alien : public elem
   public:
     alien(int, int, int, int);
     
-    void draw() const override;
-    void erase() const override;
-    void updatePos(int, int) override;
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+    QRectF boundingRect() const override;
+    void erase(QPainter*) const override;
+    void updatePos(int, int, QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
  };
 
 #endif

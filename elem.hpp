@@ -1,7 +1,11 @@
+#include <QPainter>
+#include <QGraphicsItem>
+#include <QGraphicsScene>
+
 #ifndef ELEM_HPP
 #define ELEM_HPP
 
-class elem
+class elem : public QGraphicsItem
 {
   protected:
     int width;
@@ -16,9 +20,10 @@ class elem
  
     void setXPos(int);
     void setYPos(int);
-    virtual void draw() const = 0;
-    virtual void erase() const = 0;
-    virtual void updatePos(int, int) = 0;
+    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) = 0;
+    virtual QRectF boundingRect() const = 0;
+    virtual void erase(QPainter*) const = 0;
+    virtual void updatePos(int, int, QPainter*, const QStyleOptionGraphicsItem*, QWidget*) = 0;
 };
    
 #endif

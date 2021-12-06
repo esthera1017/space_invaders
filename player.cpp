@@ -4,19 +4,26 @@
 player::player(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
 
-void player::draw() const
+void player::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-  //TODO: Will be determined by qt drawing libraries
+  painter->fillRect(xPos, yPos, width, length, "red");
 }
 
-void player::erase() const
+QRectF player::boundingRect() const
 {
-  //TODO: Will be determined by qt drawing libraries
+  qreal penWidth = 1;
+  return QRectF(xPos - penWidth, yPos - penWidth,
+                width + penWidth, length + penWidth);
 }
 
-void player::updatePos(int dx, 0)
+void player::erase(QPainter* painter) const
 {
-  erase();
+  painter->fillRect(xPos, yPos, width, length, "black");
+}
+
+void player::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+  erase(painter);
   setXPos(this->xPos + dx);
-  draw();
+  paint(painter, option, widget);
 }

@@ -4,19 +4,26 @@
 missile::missile(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
 
-void missile::draw() const
+void missile::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-  //TODO: Will be determined by qt drawing libraries
+  painter->fillRect(xPos, yPos, width, length, "white");
 }
 
-void missile::erase() const
+QRectF missile::boundingRect() const
 {
-  //TODO: Will be determined by qt drawing libraries
+  qreal penWidth = 1;
+  return QRectF(xPos - penWidth, yPos - penWidth,
+                width + penWidth, length + penWidth);
 }
 
-void alien::updatePos(0, int dy)
+void missile::erase(QPainter* painter) const
 {
-  erase();
+  painter->fillRect(xPos, yPos, width, length, "black");
+}
+
+void missile::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+{
+  erase(painter);
   setYPos(this->yPos + dy);
-  draw();
+  paint(painter, option, widget);
 }
