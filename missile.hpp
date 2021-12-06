@@ -1,18 +1,17 @@
-#ifndef MISSILE_H
-#define MISSILE_H
+#include "elem.hpp"
 
-#include <QGraphicsRectItem>
-#include <QObject>
-#include <QPainter>
-#include <elem.hpp>
+#ifndef MISSILE_HPP
+#define MISSILE_HPP
 
-class missile: public QObject, public QGraphicsRectItem {
-    Q_OBJECT
-public:
-    missile();
-    //void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
-public slots:
-    void move();
-};
+class missile : public elem
+{
+  public:
+    missile(int, int, int, int);
+    
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+    QRectF boundingRect() const override;
+    void erase(QPainter*) const override;
+    void updatePos(int, int, QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+ };
 
-#endif // MISSILE_H
+#endif

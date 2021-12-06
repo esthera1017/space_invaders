@@ -1,35 +1,39 @@
-#include "player.hpp"
+#include "map.hpp"
 #include "elem.hpp"
 
-player::player(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
+#include <QRect>
+
+map::map(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
 
-void player::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void map::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
   qreal xPosQ = qreal(xPos);
   qreal yPosQ = qreal(yPos);
   qreal widthQ = qreal(width);
   qreal lengthQ = qreal(length);
   QRectF rectangle{xPosQ, yPosQ, widthQ, lengthQ};
-  QImage image{"/Users/estheramao/Downloads/PinkCannon.png"};
+  QImage image{"/Users/estheramao/Downloads/space.jpg"};
   painter->drawImage(rectangle, image);
+
 }
 
-QRectF player::boundingRect() const
+QRectF map::boundingRect() const
 {
   qreal penWidth = 1;
   return QRectF(xPos - penWidth, yPos - penWidth,
                 width + penWidth, length + penWidth);
 }
 
-void player::erase(QPainter* painter) const
+void map::erase(QPainter* painter) const
 {
   painter->fillRect(xPos, yPos, width, length, "black");
 }
 
-void player::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void map::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
   erase(painter);
   setXPos(this->xPos + dx);
+  setYPos(this->yPos + dy);
   paint(painter, option, widget);
 }

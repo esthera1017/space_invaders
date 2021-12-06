@@ -1,12 +1,12 @@
 #include "elem.hpp"
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef MAP_HPP
+#define MAP_HPP
 
-class player : public elem
+class map : public elem
 {
   public:
-    player(int, int, int, int);
+    map(int, int, int, int);
     
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
     QRectF boundingRect() const override;
