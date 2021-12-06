@@ -7,7 +7,7 @@
 
 class elem : public QGraphicsItem
 {
-  protected:
+  public:
     int width;
     int length;
     int xPos;

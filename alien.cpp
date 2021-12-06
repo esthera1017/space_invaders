@@ -6,9 +6,20 @@
 alien::alien(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
 
+alien::alien(const alien & a) : elem::elem {a.width, a.length, a.xPos, a.yPos}
+{}
+
 void alien::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-  painter->fillRect(xPos, yPos, width, length, "green");
+ // painter->fillRect(xPos, yPos, width, length, "green");
+
+  qreal xPosQ = qreal(xPos);
+  qreal yPosQ = qreal(yPos);
+  qreal widthQ = qreal(width);
+  qreal lengthQ = qreal(length);
+  QRectF rectangle{xPosQ, yPosQ, widthQ, lengthQ};
+  QImage image{"/Users/lloydtmaodzeka/space/space_invaders/alien.png"};
+  painter->drawImage(rectangle, image);
 }
 
 QRectF alien::boundingRect() const

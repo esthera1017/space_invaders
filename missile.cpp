@@ -1,5 +1,6 @@
 #include "missile.hpp"
 #include <QTimer>
+#include <QDebug>
 
 missile::missile(){
     // drew the rect
@@ -15,4 +16,9 @@ missile::missile(){
 void missile::move(){
     // move bullet up
     setPos(x(),y()-10);
+    if (pos().y() + rect().height() < 0) {
+        scene()->removeItem(this);
+        delete this;
+        qDebug () << "deleted";
+    }
 }

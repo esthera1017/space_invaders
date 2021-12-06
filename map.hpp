@@ -1,13 +1,12 @@
 #include "elem.hpp"
 
-#ifndef ALIEN_HPP
-#define ALIEN_HPP
+#ifndef MAP_HPP
+#define MAP_HPP
 
-class alien : public elem
+class map : public elem
 {
   public:
-    alien(int, int, int, int);
-    alien(const alien &);
+    map(int, int, int, int);
 
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
     QRectF boundingRect() const override;

@@ -13,6 +13,7 @@ SOURCES += \
     elem.cpp \
     main.cpp \
     mainwindow.cpp \
+    map.cpp \
     missile.cpp \
     player.cpp
 
@@ -20,6 +21,7 @@ HEADERS += \
     alien.hpp \
     elem.hpp \
     mainwindow.hpp \
+    map.hpp \
     missile.hpp \
     player.hpp
 
