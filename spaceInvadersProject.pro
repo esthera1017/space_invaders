@@ -34,7 +34,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    ali.png \
-    alien \
     main.qml \
     spaceInvadersProject.pro.user

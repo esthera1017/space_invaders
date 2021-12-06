@@ -1,29 +1,24 @@
 #include "missile.hpp"
-#include "elem.hpp"
+#include <QTimer>
+#include <QDebug>
 
-missile::missile(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
-{}
+missile::missile(){
+    // drew the rect
+    setRect(0,0,10,50);
 
-void missile::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
-{
-  painter->fillRect(xPos, yPos, width, length, "white");
+    // connect
+    QTimer * timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+
+    timer->start(50);
 }
 
-QRectF missile::boundingRect() const
-{
-  qreal penWidth = 1;
-  return QRectF(xPos - penWidth, yPos - penWidth,
-                width + penWidth, length + penWidth);
-}
-
-void missile::erase(QPainter* painter) const
-{
-  painter->fillRect(xPos, yPos, width, length, "black");
-}
-
-void missile::updatePos(int dx, int dy, QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
-{
-  erase(painter);
-  setYPos(this->yPos + dy);
-  paint(painter, option, widget);
+void missile::move(){
+    // move bullet up
+    setPos(x(),y()-10);
+    if (pos().y() + rect().height() < 0) {
+        scene()->removeItem(this);
+        delete this;
+        qDebug () << "deleted";
+    }
 }

@@ -12,6 +12,9 @@ class player : public elem
     QRectF boundingRect() const override;
     void erase(QPainter*) const override;
     void updatePos(int, int, QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
  };
 
 #endif
