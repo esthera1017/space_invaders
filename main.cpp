@@ -5,6 +5,7 @@
 #include "alien.hpp"
 #include "player.hpp"
 #include "missile.hpp"
+#include "map.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -13,8 +14,8 @@ int main(int argc, char *argv[])
 
     QGraphicsScene* scene{new QGraphicsScene};
 
-    int rows{3};
-    int columns{7};
+    int rows{5};
+    int columns{10};
     int alienSize{40};
 
     std::vector<alien> alienArr;
@@ -24,10 +25,10 @@ int main(int argc, char *argv[])
       {
         for (int j{0}; j < rows; j++)
           {
-            alien a{alienSize, alienSize, (20 + (int) (alienSize * 1.5 * i)), (20 + (int) (alienSize * 1.5 * j))};
+            alien a{alienSize, alienSize, (100 + (int) (alienSize * 1.5 * i)), (100 + (int) (alienSize * 1.5 * j))};
             if (j % 2 == 1)
               {
-               a.setXPos((int) (alienSize * 1.5 * i));
+               //a.setXPos((int) (alienSize * 1.5 * i));
               }
             alienArr.emplace_back(alien{a});
           }
@@ -42,17 +43,13 @@ int main(int argc, char *argv[])
 
     scene->addItem(&p);
 
+    map m{800, 800, 0, 0};
+
+    m.setOpacity(0.4);
+
+    scene->addItem(&m);
+
     QGraphicsView view{scene};
-
-    QPainter painter{&view};
-
-    qreal xPosQ = qreal(0);
-    qreal yPosQ = qreal(0);
-    qreal widthQ = qreal(1000);
-    qreal lengthQ = qreal(1000);
-    QRectF rectangle{xPosQ, yPosQ, widthQ, lengthQ};
-    QImage image{"/Users/estheramao/Downloads/space.jpg"};
-    painter.drawImage(rectangle, image);
 
     view.show();
 
