@@ -2,25 +2,29 @@
 #include <QGraphicsView>
 
 #include "alien.hpp"
+#include "player.hpp"
+#include "missile.hpp"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
 
-    qreal xPos{0};
-    qreal yPos{0};
-    qreal width{640};
-    qreal height {480};
-
-    QGraphicsScene scene{xPos, yPos, width, height, nullptr};
+    QGraphicsScene* scene{new QGraphicsScene};
 
     alien a{10, 10, 20, 20};
 
-    scene.addItem(&a);
+    scene->addItem(&a);
 
-    QGraphicsView view{&scene};
+    player j{100, 100, 20, 60};
+
+    scene->addItem(&j);
+
+    missile m{20, 30, 2, 5};
+
+    scene->addItem(&m);
+
+    QGraphicsView view{scene};
 
     QPainter p{&view};
 
