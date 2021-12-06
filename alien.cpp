@@ -9,7 +9,6 @@ alien::alien(int width, int length, int xPos, int yPos) : elem::elem {width, len
 void alien::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
   painter->fillRect(xPos, yPos, width, length, "green");
-
 }
 
 QRectF alien::boundingRect() const
