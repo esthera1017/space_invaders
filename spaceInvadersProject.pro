@@ -11,19 +11,23 @@ CONFIG += c++11
 SOURCES += \
     alien.cpp \
     elem.cpp \
+    game.cpp \
     main.cpp \
     mainwindow.cpp \
     map.cpp \
     missile.cpp \
-    player.cpp
+    player.cpp \
+    score.cpp
 
 HEADERS += \
     alien.hpp \
     elem.hpp \
+    game.hpp \
     mainwindow.hpp \
     map.hpp \
     missile.hpp \
-    player.hpp
+    player.hpp \
+    score.hpp
 
 FORMS += \
     mainwindow.ui

@@ -1,10 +1,12 @@
 #include "elem.hpp"
+#include <QObject>
 
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-class player : public elem
+class player : public QObject, public elem
 {
+    Q_OBJECT
   public:
     player(int, int, int, int);
     
@@ -15,6 +17,9 @@ class player : public elem
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
+
+public slots:
+    void alienMove();
  };
 
 #endif

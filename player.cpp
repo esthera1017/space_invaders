@@ -1,11 +1,15 @@
 #include "player.hpp"
 #include "elem.hpp"
+#include "game.hpp"
 #include <QKeyEvent>
 #include <iostream>
 //#include <QGraphicsView>
 #include "missile.hpp"
-#include "missile.hpp"
+#include "alien.hpp"
 #include <QDebug>
+#include <QTimer>
+
+extern game * gm;
 
 player::player(int width, int length, int xPos, int yPos) : elem::elem {width, length, xPos, yPos}
 {}
@@ -17,7 +21,7 @@ void player::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QW
     qreal widthQ = qreal(width);
     qreal lengthQ = qreal(length);
     QRectF rectangle{xPosQ, yPosQ, widthQ, lengthQ};
-    QImage image{"/Users/lloydtmaodzeka/space/space_invaders/PickCannon.png"};
+    QImage image{"/Users/lloydtmaodzeka/space/space_invaders/PinkCannon.png"};
     painter->drawImage(rectangle, image);
 }
 
@@ -44,29 +48,45 @@ void player::keyPressEvent(QKeyEvent * event)
 {
   qDebug() << "Player knows you pressed a key";
   switch(event->key()) {
-//    case Qt::Key_Up:
-//      setPos(x(), y() - 10);
-//      break;
-//    case Qt::Key_Down:
-//      setPos(x(), y() + 10);
-//      break;
     case Qt::Key_Left:
-      setPos(x() - 10, y());
-      //xPos = xPos - 10;
+      if ((x() - 10  < 0) == false) {
+        setPos(x() - 10, y());
+      }
       break;
     case Qt::Key_Right:
-      setPos(x() + 10, y());
-      //xPos = xPos + 10;
+      if ((x() + 10 > 800 - width) == false) {
+        setPos(x() + 10, y());
+      }
       break;
+  case Qt::Key_Up:
+    if ((x() + 10 > 800 - width) == false) {
+      setPos(x(), y() - 10);
+    }
+    break;
     case Qt::Key_Space:
-      //missile m{20, 30, 2, 5};
       missile * missile = new class missile();
-      //missile * missile = new missile(0, 0, 0, 0);
-      missile->setPos(x(), y ());
-      //std::cout << x() << " " << y();
+      missile->setPos(x() + (width/2 - 10), y ());
       scene()->addItem(missile);
       qDebug() << "missile created";
-      //missile m{20, 30, 2, 5};
       break;
   }
 }
+
+void player::alienMove()
+{
+    int rand{(int)arc4random_uniform(39)};
+    if (gm->store[rand] == -99 || gm->alienArr->at(rand)->id < 0 || gm->alienArr->at(rand)->id > 39) return;
+    gm->store[rand] = -99;
+    std::cout << rand << "\n";
+    std::cout << gm->alienArr->at(rand)->id << "\n\n";
+    if (gm->alienArr->at(rand) != NULL) {
+        QTimer * timer = new QTimer();
+        QObject::connect(timer,SIGNAL(timeout()),gm->alienArr->at(rand),SLOT(move()));
+        //timer->start(50);
+        timer->start(50);
+    } else {
+        return;
+    }
+}
+
+

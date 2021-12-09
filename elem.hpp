@@ -25,6 +25,7 @@ class elem : public QGraphicsItem
     virtual void erase(QPainter*) const = 0;
     virtual void updatePos(int, int, QPainter*, const QStyleOptionGraphicsItem*, QWidget*) = 0;
 
+
 };
    
 #endif
